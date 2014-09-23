@@ -33,6 +33,17 @@ class Root(_BaseHandler):
         self.response.write(pformat(tl))
         self.response.write("</pre>")
 
+        # key value test
+        from twbot import db
+        self.response.write("<pre>")
+        self.response.write(db.get("add"))
+        self.response.write("</pre>")
+
+        db.put("bcd", "def")
+        self.response.write("<pre>")
+        self.response.write(db.get("bcd"))
+        self.response.write("</pre>")
+
         #self.response.write(len(token_entity.oauth_token))
         # user = users.get_current_user()
 
