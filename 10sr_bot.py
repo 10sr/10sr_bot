@@ -7,10 +7,8 @@ import datetime
 import twitter as tw
 
 
-# unsafe?
-CONSUMER_KEY = "0B1WZuWtcqdNmmnpzkzQSwnP8"
-
 TW_ID = "10sr_bot"
+CONSUMER_KEY = "0B1WZuWtcqdNmmnpzkzQSwnP8"
 
 ###############################
 # Handle ndb database
@@ -18,6 +16,32 @@ class TwitterToken(ndb.Model):
     """Model for twitter oauth tokens."""
     oauth_token = ndb.StringProperty(indexed=False, default=None)
     oauth_secret = ndb.StringProperty(indexed=False, default=None)
+
+
+
+##################################
+# My Twitter class
+
+class _MyTwitter(tw.Twitter):
+    def __init__(self, twitter_id, *args, **kargs):
+        # http://blog.vier.jp/2013/02/google-app-engine-appengine-ja-night-23.html
+        token_entity = TwitterToken.get_by_id(twitter_id)
+        if token_entity == None:
+            token_entity = TwitterToken(id=twitter_id)
+            token_entity.put()
+
+        oauth_token = token_entity.oauth_token
+        oauth_secret = token_entity.oauth_secret
+
+        with open("./consumer_secret.txt") as f:
+            consumer_secret = f.read().strip()
+
+        tw.Twitter.__init__(self,
+                            *args,
+                            auth=tw.OAuth(oauth_token, oauth_secret,
+                                          CONSUMER_KEY, consumer_secret),
+                            **kargs)
+        return
 
 
 ##################################
@@ -30,26 +54,16 @@ class _TWBOTHandler(webapp2.RequestHandler):
 class MainPage(_TWBOTHandler):
 
     def get(self):
-        # http://blog.vier.jp/2013/02/google-app-engine-appengine-ja-night-23.html
-        token_entity = TwitterToken.get_by_id(TW_ID)
-        if token_entity == None:
-            token_entity = TwitterToken(id=TW_ID)
-            token_entity.put()
 
+        t = _MyTwitter(TW_ID)
 
-        # why values are enclosed by whitespaces?
-        oauth_token = token_entity.oauth_token.strip()
-        oauth_secret = token_entity.oauth_secret.strip()
+        tl = t.statuses.home_timeline()
 
-        with open("./consumer_secret.txt") as f:
-            consumer_secret = f.read().strip()
+        from pprint import pformat
+        self.response.write("<pre>")
+        self.response.write(pformat(tl))
+        self.response.write("</pre>")
 
-        t = tw.Twitter(auth=tw.OAuth(oauth_token, oauth_secret,
-                                     CONSUMER_KEY, consumer_secret))
-        t.statuses.update(status="Auth succeeded at {}"
-                          .format(str(datetime.datetime.now())))
-
-        self.response.write("hell!")
         #self.response.write(len(token_entity.oauth_token))
         # user = users.get_current_user()
 
@@ -65,6 +79,9 @@ class MainPage(_TWBOTHandler):
 class Periodic(_TWBOTHandler):
 
     def get(self):
+        t = _MyTwitter(TW_ID)
+        t.statuses.update(status="Auth succeeded at {}"
+                          .format(str(datetime.datetime.now())))
         self.response.write("hell!")
         return
 
@@ -72,5 +89,5 @@ class Periodic(_TWBOTHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/periodic', Periodic),
+    ('/periodic/', Periodic),
 ], debug=True)
