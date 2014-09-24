@@ -11,7 +11,7 @@ class TwitterToken(ndb.Model):
 #################################
 # key value
 class _KeyValue(ndb.Model):
-    """General perpose key-value storage."""
+    """General perpose key-value store."""
     value = ndb.StringProperty(indexed=False, default=None)
 
 def get(key):
