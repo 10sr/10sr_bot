@@ -1,0 +1,4 @@
+cron:
+- description: main entry
+  url: /periodic/
+  schedule: every 1 hours
