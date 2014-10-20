@@ -15,7 +15,7 @@ class Periodic(_BaseHandler):
 
     def get(self):
         t = MyTwitter(config.TW_ID)
-        t.statuses.update(status="Auth succeeded at {}"
+        t.statuses.update(status="Periodic tweet at {}"
                           .format(str(datetime.datetime.now())))
         self.response.write("hell!")
         return
