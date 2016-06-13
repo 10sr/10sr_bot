@@ -1,0 +1,3 @@
+= 10sr_bot
+
+Twitter bot for http://twitter.com/10sr_bot .
