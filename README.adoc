@@ -1,3 +1,16 @@
 = 10sr_bot
 
 Twitter bot for http://twitter.com/10sr_bot .
+
+
+== Dokku Deploy
+
+----
+make create
+alias dokku="ssh -t dokku@d.10sr.f5.si"
+dokku config:set 10sr_bot HUBOT_TWITTER_KEY=""
+dokku config:set 10sr_bot HUBOT_TWITTER_SECRET=""
+dokku config:set 10sr_bot HUBOT_TWITTER_TOKEN=""
+dokku config:set 10sr_bot HUBOT_TWITTER_TOKEN_SECRET=""
+make deploy
+----
