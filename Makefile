@@ -3,7 +3,7 @@
 dokku := ssh -t dokku@conoha
 
 deploy:
-	git push dokku@conoha:10sr_bot master
+	git push -f dokku@conoha:10sr_bot master
 
 logs:
 	$(dokku) logs 10sr_bot
