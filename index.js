@@ -17,9 +17,15 @@ var t = new twit({
 t.post("statuses/update", {
   status: 'おやすみ ' + new Date().toString()
 }, function(err, data, response){
-  console.log(err.toString());
-  console.log(data.toString());
-  console.log(response.toString());
+  if (err) {
+    console.log(err.toString());
+  }
+  if (data) {
+    console.log(data.toString());
+  }
+  if (response) {
+    console.log(response.toString());
+  }
 });
 
 var tl = t.stream("user", {});
@@ -28,8 +34,14 @@ tl.on("message", function(msg){
   t.post("statuses/update", {
     status: JSON.stringify(msg).slice(0, 130)
   }, function(err, data, response){
-    console.log(err.toString());
-    console.log(data.toString());
-    console.log(response.toString());
+    if (err) {
+      console.log(err.toString());
+    }
+    if (data) {
+      console.log(data.toString());
+    }
+    if (response) {
+      console.log(response.toString());
+    }
   })
 });
