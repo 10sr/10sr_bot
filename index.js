@@ -26,7 +26,7 @@ var tl = t.stream("user", {});
 
 tl.on("message", function(msg){
   t.post("statuses/update", {
-    status: JSON.stringify(msg).slice(0, 130);
+    status: JSON.stringify(msg).slice(0, 130)
   }, function(err, data, response){
     console.log(err.toString());
     console.log(data.toString());
