@@ -31,17 +31,18 @@ t.post("statuses/update", {
 var tl = t.stream("user", {});
 
 tl.on("message", function(msg){
-  t.post("statuses/update", {
-    status: JSON.stringify(msg).slice(0, 130)
-  }, function(err, data, response){
-    if (err) {
-      console.log(err.toString());
-    }
-    if (data) {
-      console.log(data.toString());
-    }
-    if (response) {
-      console.log(response.toString());
-    }
-  })
+  console.log(JSON.stringify(msg));
+  // t.post("statuses/update", {
+  //   status: JSON.stringify(msg).slice(0, 130)
+  // }, function(err, data, response){
+  //   if (err) {
+  //     console.log(err.toString());
+  //   }
+  //   if (data) {
+  //     console.log(data.toString());
+  //   }
+  //   if (response) {
+  //     console.log(response.toString());
+  //   }
+  // })
 });
