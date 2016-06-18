@@ -1,0 +1,12 @@
+= 10sr_bot
+
+== Setup
+
+You have to set tokens:
+
+----
+ssh dokku@conoha config:set 10sr_bot \
+    TWITTER_KEY="" \
+    TWITTER_SECRET="" \
+    TWITTER_TOKEN="" \
+    TWITTER_TOKEN_SECRET=""
