@@ -1,4 +1,7 @@
+const myName = "10sr_bot";
+
 var twit = require("twit");
+var isarray = require("isarray");
 
 var twitterTokens = {
   key: process.env.TWITTER_KEY,
@@ -32,6 +35,29 @@ var tl = t.stream("user", {});
 
 tl.on("message", function(msg){
   console.log(JSON.stringify(msg));
+  if (! msg.text) {
+    return;
+  }
+
+  if (isMentionToMe(msg)) {
+  var args = msg.text.split(" ");
+    if (args.indexOf("ping") >= 0) {
+      t.post("statuses/update", {
+        status: "@" + msg.user.name + " pong"
+      }, function(err, data, response){
+        if (err) {
+          console.log(err.toString());
+        }
+        if (data) {
+          console.log(data.toString());
+        }
+        if (response) {
+          console.log(response.toString());
+        }
+      })
+    }
+  }
+
   // t.post("statuses/update", {
   //   status: JSON.stringify(msg).slice(0, 130)
   // }, function(err, data, response){
@@ -46,3 +72,20 @@ tl.on("message", function(msg){
   //   }
   // })
 });
+
+function isMentionToMe(msg){
+  if (!msg.entities) {
+    return false;
+  }
+
+  if (!isarray(msg.entities.user_mentions)) {
+    return false;
+  }
+
+  for (var i = 0; i < msg.entities.user_mentions.length; i++) {
+    if (msg.entities.user_mentions[i].name === myName) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -4,6 +4,7 @@
   "description": "10sr bot",
   "main": "index.js",
   "dependencies": {
+    "isarray": "^1.0.0",
     "twit": "^2.2.4"
   },
   "devDependencies": {},
