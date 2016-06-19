@@ -5,7 +5,8 @@ delete handlers["index"];
 
 exports.handle = (twitter, message) => {
   for (var name in handlers) {
-    if (!handlers[name].mention || message.isMentionToMe) {
+    if ((!handlers[name].mention || message.isMentionToMe) &&
+        message.text.match(handlers[name].regexp)) {
       handlers[name].handle(twitter, message);
     }
   }
