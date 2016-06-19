@@ -4,7 +4,7 @@ var handlers = requireDir("./");
 delete handlers["index"];
 
 exports.handle = (twitter, message) => {
-  if (message.user = "10sr_bot") {
+  if (message.user === "10sr_bot") {
     return;
   }
 
