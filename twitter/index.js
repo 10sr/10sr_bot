@@ -19,6 +19,9 @@ class Twitter extends EventEmitter {
     this._twit.post("statuses/update", {
       status: text
     }, function(err, data, response){
+      if (err) {
+        console.log(err.toString());
+      }
     });
   }
 }
