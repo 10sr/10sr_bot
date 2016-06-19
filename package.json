@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "10sr bot",
   "main": "index.js",
+  "engines": {
+    "node": "^6.2.1"
+  }
   "dependencies": {
     "isarray": "^1.0.0",
     "twit": "^2.2.4"
