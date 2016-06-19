@@ -21,6 +21,8 @@ class Message {
     } else {
       this.hashTags = this.mentions = [];
     }
+
+    this.isMentionToMe = msg.mentions.indexOf("10sr_bot") >= 0;
   }
 }
 
