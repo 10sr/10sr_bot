@@ -24,6 +24,12 @@ class Twitter extends EventEmitter {
       }
     });
   }
+
+  mentionTo(user, text){
+    if (user) {
+      this.post("@" + user + " " + text);
+    }
+  }
 }
 
 module.exports = Twitter;
