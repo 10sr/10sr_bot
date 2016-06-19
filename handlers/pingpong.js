@@ -1,4 +1,7 @@
 module.exports = {
   regexp: /ping/,
-  handle: 
+  mention: true,
+  handle: (twitter, message) => {
+    twitter.post("@" + message.user + " pong!");
+  }
 };

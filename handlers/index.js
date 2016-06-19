@@ -1,5 +1,12 @@
+var requireDir = require("require-dir");
+
+var handlers = requireDir("./");
+delete handlers["index"];
+
 exports.handle = (twitter, message) => {
-  if (message.isMentionToMe && message.text.indexOf("ping") >= 0) {
-    twitter.post("@" + message.user + " pong");
+  for (var name in handlers) {
+    if (!handlers[name].mention || message.isMentionToMe) {
+      handlers[name].handle(twitter, message);
+    }
   }
 }
