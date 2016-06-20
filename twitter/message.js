@@ -16,8 +16,9 @@ class Message {
     this.id = msg.id || 0;
 
     if (msg.entities) {
-      this.hashTags = msg.entities.hashags || [];
-      this.mentions = msg.entities.user_mentions.map(elem => elem.screen_name) || [];
+      this.hashTags = msg.entities.hashags.map(elem => elem.text) || [];
+      this.mentions = msg.entities.user_mentions.map(elem => elem.screen_name) ||
+        [];
     } else {
       this.hashTags = this.mentions = [];
     }
