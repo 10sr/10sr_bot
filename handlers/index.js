@@ -1,7 +1,7 @@
 var requireDir = require("require-dir");
 
 var handlers = requireDir("./");
-delete handlers["index"];
+delete handlers.index;
 
 exports.handle = (twitter, message) => {
   if (message.user === "10sr_bot") {
