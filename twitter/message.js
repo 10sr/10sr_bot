@@ -28,6 +28,9 @@ class Message {
 
 module.exports = Message;
 
+
+// Sample payloads
+
 var _SampleMsg = {
   "created_at": "Sat Jun 18 14:15:01 +0000 2016",
   "id": 744171564371869700,
@@ -109,3 +112,6 @@ var _SampleMsg = {
   "lang": "ja",
   "timestamp_ms": "1466259301642"
 };
+
+// Entities are a bit complex
+// https://dev.twitter.com/overview/api/entities-in-twitter-objects
