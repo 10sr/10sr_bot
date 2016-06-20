@@ -12,12 +12,12 @@ class Message {
       this.created_at = null;
     }
     this.text = msg.text || "";
-    this.user = msg.user && msg.user.name || "";
+    this.user = msg.user && msg.user.screen_name || "";
     this.id = msg.id || 0;
 
     if (msg.entities) {
       this.hashTags = msg.entities.hashags || [];
-      this.mentions = msg.entities.user_mentions.map(elem => elem.name) || [];
+      this.mentions = msg.entities.user_mentions.map(elem => elem.screen_name) || [];
     } else {
       this.hashTags = this.mentions = [];
     }
