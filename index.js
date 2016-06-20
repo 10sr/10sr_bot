@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const myName = "10sr_bot";
 
 var Twitter = require("./twitter/index.js");
