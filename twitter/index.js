@@ -1,6 +1,7 @@
 var Message = require("./message.js");
 
 var Twit = require("twit");
+var shallowCopy = require("shallow-copy");
 
 var EventEmitter = require("events");
 
@@ -15,10 +16,10 @@ class Twitter extends EventEmitter {
     });
   }
 
-  post(text){
-    this._twit.post("statuses/update", {
-      status: text
-    }, function(err, data, response){
+  post(text, params = {}){
+    params = shallowCopy(params || {});
+    params.status = text;
+    this._twit.post("statuses/update", params, function(err, data, response){
       if (err) {
         console.log(err.toString());
       }
@@ -33,7 +34,11 @@ class Twitter extends EventEmitter {
 
   replyTo(message, text){
     if (message && message.user) {
-      this.post("@" + message.user + " " + text);
+      var params = {};
+      if (message.id) {
+        params.in_reply_to_status_id = message.id;
+      }
+      this.post("@" + message.user + " " + text, params);
     }
   }
 }

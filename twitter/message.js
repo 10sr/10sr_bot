@@ -12,7 +12,7 @@ class Message {
       this.created_at = null;
     }
     this.text = msg.text || "";
-    this.user = msg.user && msg.user.screen_name || "";
+    this.user = msg.user && msg.user.ascreen_name || "";
     this.id = msg.id || 0;
 
     if (msg.entities) {
