@@ -30,6 +30,12 @@ class Twitter extends EventEmitter {
       this.post("@" + user + " " + text);
     }
   }
+
+  replyTo(message, text){
+    if (message && message.user) {
+      this.post("@" + message.user + " " + text);
+    }
+  }
 }
 
 module.exports = Twitter;
