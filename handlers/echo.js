@@ -3,6 +3,6 @@ module.exports = {
   mention: true,
   handle: (twitter, message) => {
     var text = message.text.match(/echo (.*)/)[1];
-    twitter.mentionTo(message.user, text);
+    twitter.replyTo(message, text);
   }
 };
