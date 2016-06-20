@@ -13,7 +13,7 @@ class Message {
     }
     this.text = msg.text || "";
     this.user = msg.user && msg.user.screen_name || "";
-    this.id = msg.id || 0;
+    this.id = msg.id_str || 0;
 
     if (msg.entities) {
       this.hashTags = msg.entities.hashtags.map(elem => elem.text) || [];
