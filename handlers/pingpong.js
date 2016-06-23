@@ -1,7 +1,6 @@
 module.exports = {
-  regexp: /\sping$/,
-  mention: true,
-  handle: (twitter, message) => {
+  command: "ping",
+  handle: (twitter, args, message) => {
     twitter.replyTo(message, "うっさい");
   }
 };

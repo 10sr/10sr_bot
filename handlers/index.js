@@ -9,6 +9,8 @@ exports.handle = (twitter, message) => {
   }
 
   for (var name in handlers) {
+    if (handlers[name])
+
     if ((!handlers[name].mention || message.isMentionToMe) &&
         message.text.match(handlers[name].regexp)) {
       handlers[name].handle(twitter, message);
