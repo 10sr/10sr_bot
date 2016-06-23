@@ -18,7 +18,7 @@ var twitter = new Twitter({
   access_token_secret: twitterTokens.tokenSecret
 });
 
-twitter.post("おやすみ " + new Date().toString());
+twitter.post("おやすみ " + new Date().toISOString());
 
 twitter.on("userMessage", message => {
   handlers.handle(twitter, message);
