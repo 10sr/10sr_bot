@@ -9,6 +9,11 @@ max_line_length = 80
 indent_style = space
 indent_size = 2
 
+[.jshintrc]
+indent_style = space
+indent_size = 2
+emacs_mode = json
+
 [Makefile]
 indent_style = tab
 indent_size = 4
