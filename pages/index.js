@@ -1,7 +1,7 @@
 var requireDir = require("require-dir");
 
 var pages = requireDir("./");
-delete handlers.index;
+delete pages.index;
 
 exports.enable = (express, twitter) => {
   for (var name in pages) {
