@@ -23,3 +23,11 @@ twitter.post("おやすみ " + new Date().toISOString());
 twitter.on("userMessage", message => {
   handlers.handle(twitter, message);
 });
+
+
+var express = require("express")();
+var pages = require("./pages/index.js");
+
+pages.enable(express, twitter);
+
+express.listen(80);
