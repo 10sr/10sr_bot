@@ -30,4 +30,4 @@ var pages = require("./pages/index.js");
 
 pages.enable(express, twitter);
 
-express.listen(80);
+express.listen(8000);
