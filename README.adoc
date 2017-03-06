@@ -1,5 +1,7 @@
 = 10sr_bot
 
+http://10sr_bot.d.3ends.info/
+
 == Setup
 
 You need to create `secret.sh` to invoke `local_run.sh` and `make setup-tokens`:
