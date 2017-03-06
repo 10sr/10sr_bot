@@ -8,6 +8,7 @@ var EventEmitter = require("events");
 class Twitter extends EventEmitter {
   constructor(options){
     super();
+    this.lastPostMessage = null;
     this._twit = new Twit(options);
     this._userStream = this._twit.stream("user", {});
 
@@ -22,7 +23,9 @@ class Twitter extends EventEmitter {
     this._twit.post("statuses/update", params, function(err, data, response){
       if (err) {
         console.log(err.toString());
+        return;
       }
+      self.lastPostMessage = text;
     });
   }
 
