@@ -20,12 +20,12 @@ class Twitter extends EventEmitter {
   post(text, params = {}){
     params = shallowCopy(params || {});
     params.status = text;
-    this._twit.post("statuses/update", params, function(err, data, response){
+    this._twit.post("statuses/update", params, (err, data, response) => {
       if (err) {
         console.log(err.toString());
         return;
       }
-      self.lastPostMessage = text;
+      this.lastPostMessage = text;
     });
   }
 
