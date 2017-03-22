@@ -15,6 +15,10 @@ class Twitter extends EventEmitter {
     this._userStream.on("message", msg => {
       this.emit("userMessage", new Message(msg));
     });
+
+    this._userStream.on("error", err => {
+      console.log(err.toString())
+    })
   }
 
   post(text, params = {}){
