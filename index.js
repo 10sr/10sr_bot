@@ -1,5 +1,11 @@
 #!/usr/bin/env node
+const fs = require("fs");
+
 const myName = "10sr_bot";
+
+const gitCommitHash = fs.readFileSync("./git_commit_hash.txt", {
+  encoding: "utf-8"
+});
 
 var Twitter = require("./twitter/index.js");
 var handlers = require("./handlers/index.js");
@@ -18,7 +24,9 @@ var twitter = new Twitter({
   access_token_secret: twitterTokens.tokenSecret
 });
 
-twitter.post("おやすみ " + new Date().toISOString());
+twitter.post("おやすみ " +
+             new Date().toISOString() +
+             "HEAD: " + gitCommitHash.slice(0, 6));
 
 twitter.on("userMessage", message => {
   handlers.handle(twitter, message);
