@@ -26,7 +26,7 @@ var twitter = new Twitter({
 
 twitter.post("おやすみ " +
              new Date().toISOString() +
-             "HEAD: " + gitCommitHash.slice(0, 6));
+             " git: " + gitCommitHash.slice(0, 8));
 
 twitter.on("userMessage", message => {
   handlers.handle(twitter, message);
