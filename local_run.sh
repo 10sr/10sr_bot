@@ -2,6 +2,8 @@
 
 set -eux
 
+git describe --abbrev=8 --always --dirty >git_version.txt
+
 . ./secret.sh
 
 export TWITTER_KEY

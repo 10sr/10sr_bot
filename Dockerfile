@@ -7,6 +7,6 @@ COPY package.json /root/app/package.json
 RUN npm install && npm cache clean
 
 COPY . /root/app/
-RUN git rev-parse HEAD >git_commit_hash.txt
+RUN git describe --abbrev=8 --always --dirty >git_version.txt
 
 CMD ["npm", "start"]

@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const myName = "10sr_bot";
 
-const gitCommitHash = fs.readFileSync("./git_commit_hash.txt", {
+const gitVersion = fs.readFileSync("./git_version.txt", {
   encoding: "utf-8"
 });
 
@@ -26,7 +26,7 @@ var twitter = new Twitter({
 
 twitter.post("おやすみ " +
              new Date().toISOString() +
-             " git: " + gitCommitHash.slice(0, 8));
+             " git: " + gitVersion);
 
 twitter.on("userMessage", message => {
   handlers.handle(twitter, message);
