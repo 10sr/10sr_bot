@@ -36,6 +36,8 @@ twitter.on("userMessage", message => {
 var express = require("express")();
 var pages = require("./pages/index.js");
 
-pages.enable(express, twitter, "/10sr_bot");
+pages.enable(express, twitter, {
+  webRoot: "/10sr_bot"
+});
 
 express.listen(5000);
