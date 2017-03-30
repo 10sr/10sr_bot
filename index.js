@@ -43,9 +43,11 @@ var express = require("express")();
 // みたいな感じ
 passport.use(new BearerStrategy((token, cb) => {
   if (token === postBearerToken) {
-    return cb(null, { state: "accepted" });
+    return cb(null, { user: "default" }, { scope: "rw" });
   } else {
-    return cb(null, false);
+    return cb(null, false, {
+      message: "Bearer Unauthorized"
+    });
   }
 }));
 
