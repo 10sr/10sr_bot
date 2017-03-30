@@ -4,7 +4,7 @@ http://3ends.info/10sr_bot
 
 == Setup
 
-You need to create `secret.sh` to invoke `local_run.sh` and `make setup-tokens`:
+You need to create `secret.sh` to make it work:
 
 .secret.sh
 ----
