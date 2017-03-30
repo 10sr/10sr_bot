@@ -32,11 +32,28 @@ twitter.on("userMessage", message => {
   handlers.handle(twitter, message);
 });
 
+const postBearerToken = process.env.POST_BEARER_TOKEN;
 
+var passport = require("passport");
+var BearerStrategy = require("passport-http-bearer").Strategy;
+var morgan = require("morgan");
 var express = require("express")();
+
+// curl -i -X POST -H "authorization: Bearer toen" -d "{}" http://localhost:5000/10sr_bot/post
+// みたいな感じ
+passport.use(new BearerStrategy((token, cb) => {
+  if (token === postBearerToken) {
+    return cb(null, { state: "accepted" });
+  } else {
+    return cb(null, false);
+  }
+}));
+
+express.use(morgan("combined"));
+
 var pages = require("./pages/index.js");
 
-pages.enable(express, twitter, {
+pages.enable(express, passport, twitter, {
   webRoot: "/10sr_bot"
 });
 

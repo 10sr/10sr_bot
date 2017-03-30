@@ -10,5 +10,6 @@ export TWITTER_KEY
 export TWITTER_SECRET
 export TWITTER_TOKEN
 export TWITTER_TOKEN_SECRET
+export POST_BEARER_TOKEN=token
 
 npm start

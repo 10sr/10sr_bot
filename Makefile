@@ -4,4 +4,4 @@ start:
 	npm start
 
 start-local:
-	./local_run.sh
+	./start_local.sh
