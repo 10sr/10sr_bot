@@ -1,5 +1,5 @@
 module.exports = {
-  path: "/post",
+  path: "/status",
   method: "post",
   makeHandler: (twitter, config) => (req, res) => {
     console.log(JSON.stringify(req.body));
