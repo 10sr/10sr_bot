@@ -1,4 +1,13 @@
 #!/usr/bin/env node
+
+const postBearerToken = process.env.POST_BEARER_TOKEN;
+const twitterTokens = {
+  key: process.env.TWITTER_KEY,
+  secret: process.env.TWITTER_SECRET,
+  token: process.env.TWITTER_TOKEN,
+  tokenSecret: process.env.TWITTER_TOKEN_SECRET
+};
+
 const fs = require("fs");
 
 const myName = "10sr_bot";
@@ -9,13 +18,6 @@ const gitVersion = fs.readFileSync("./git_version.txt", {
 
 var Twitter = require("./twitter/index.js");
 var handlers = require("./handlers/index.js");
-
-var twitterTokens = {
-  key: process.env.TWITTER_KEY,
-  secret: process.env.TWITTER_SECRET,
-  token: process.env.TWITTER_TOKEN,
-  tokenSecret: process.env.TWITTER_TOKEN_SECRET
-};
 
 var twitter = new Twitter({
   consumer_key: twitterTokens.key,
@@ -32,31 +34,11 @@ twitter.on("userMessage", message => {
   handlers.handle(twitter, message);
 });
 
-const postBearerToken = process.env.POST_BEARER_TOKEN;
-
-var passport = require("passport");
-var BearerStrategy = require("passport-http-bearer").Strategy;
-var morgan = require("morgan");
-var express = require("express")();
-
-// curl -i -X POST -H "authorization: Bearer toen" -d "{}" http://localhost:5000/10sr_bot/post
-// みたいな感じ
-passport.use(new BearerStrategy((token, cb) => {
-  if (token === postBearerToken) {
-    return cb(null, { user: "default" }, { scope: "rw" });
-  } else {
-    return cb(null, false, {
-      message: "Bearer Unauthorized"
-    });
-  }
-}));
-
-express.use(morgan("combined"));
 
 var pages = require("./pages/index.js");
 
-pages.enable(express, passport, twitter, {
-  webRoot: "/10sr_bot"
+pages.start(twitter, {
+  webRoot: "/10sr_bot",
+  postBearertoken: postBearerToken,
+  port: 5000
 });
-
-express.listen(5000);
