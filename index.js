@@ -39,6 +39,6 @@ var pages = require("./pages/index.js");
 
 pages.start(twitter, {
   webRoot: "/10sr_bot",
-  postBearertoken: postBearerToken,
+  postBearerToken: postBearerToken,
   port: 5000
 });

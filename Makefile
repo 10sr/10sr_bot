@@ -8,5 +8,5 @@ start-local:
 
 docker-local:
 	docker build . -t local/10sr_bot
-	docker run -p 5000 local/10sr_bot ./start_local.sh
+	docker run -p 5000:5000 local/10sr_bot ./start_local.sh
 
