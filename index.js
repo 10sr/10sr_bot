@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
+const assert = require("assert");
+
+assert(process.env.POST_BEARER_TOKEN, "POST_BEARER_TOKEN is undefined");
+assert(process.env.TWITTER_KEY, "TWITTER_KEY is undefined");
+assert(process.env.TWITTER_SECRET, "TWITTER_SECRET is undefined");
+assert(process.env.TWITTER_TOKEN, "TWITTER_TOKEN is undefined");
+assert(process.env.TWITTER_TOKEN_SECRET, "TWITTER_TOKEN_SECRET is undefined");
+
 const postBearerToken = process.env.POST_BEARER_TOKEN;
 const twitterTokens = {
   key: process.env.TWITTER_KEY,
