@@ -3,23 +3,42 @@ module.exports = {
   method: "post",
   makeHandler: (twitter, config) => (req, res) => {
     var message = req.body.message;
-    if (message) {
-      twitter.post(message, {}, (err, data, response) => {
+    if (!message) {
+      process.nextTick(() => {
         res.json({
+          meta: {
+            status: 400,
+            errorCode: "BAD_REQUEST",
+            errorMessage: "status is not given"
+          }
+        })
+      });
+      return;
+    }
+
+    twitter.post(message, {}, (err, data, response) => {
+      if (err) {
+        res.json({
+          meta: {
+            status: 500,
+            errorCode: "INTERNAL_SERVER_ERROR",
+            errorMessage: "Error from twitter: " + err.toString()
+          }
+        })
+        return;
+      }
+      res.json({
+        meta: {
+          status: 200
+        },
+        data: {
           message: message,
-          twitter: {
-            err: err,
+          returned: {
             data: data,
             response: response
           }
-        });
+        }
       });
-    } else {
-      process.nextTick(() => {
-        res.json({
-          err: "status is not given"
-        })
-      });
-    }
+    });
   }
 };
