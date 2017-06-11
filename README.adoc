@@ -1,6 +1,6 @@
 = 10sr_bot
 
-http://3ends.info/10sr_bot
+https://3ends.info/10sr_bot
 
 == Setup
 
