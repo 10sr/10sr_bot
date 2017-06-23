@@ -26,6 +26,7 @@ class Twitter extends EventEmitter {
     params.status = text;
     this._twit.post("statuses/update", params, (err, data, response) => {
       if (! err) {
+        console.log("Post succeeded: " + text);
         this.lastPostMessage = text;
       } else {
          console.log(err.toString());
