@@ -1,5 +1,7 @@
 = 10sr_bot
 
+image:https://quay.io/repository/10sr/10sr_bot/status["Docker Repository on Quay", link="https://quay.io/repository/10sr/10sr_bot"]
+
 https://3ends.info/10sr_bot
 
 == Setup
